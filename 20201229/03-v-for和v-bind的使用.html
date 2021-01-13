@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>03</title>
+</head>
+<style>
+    .active{
+        background-color: #FF00FF;
+    }
+</style>
+<body>
+<div id="app">
+    <ul>
+        <li v-for="(item, index) in movies" :class="{'active':isActive}" @click="clickBtn(index)"> {{index}}=={{item}} </li>
+    </ul>
+</div>
+<script src="./js/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: '#app',
+        data:{
+            movies: ['天龙八部','射雕英雄传','神雕侠侣','倚天屠龙记'],
+            isActive: false,
+        },
+        methods:{
+            add:function(){
+                console.log("这里点击触发了add方法！");
+                this.counts++
+            },
+            sub:function(){
+                console.log("这里点击触发了sub方法！");
+                this.counts--
+            },
+            clickBtn: function(e){
+                alert(e);
+                
+
+            }
+        }
+    })
+</script>
+</body>
+</html>

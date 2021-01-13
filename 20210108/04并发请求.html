@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>axios的使用</title>
+</head>
+<body>
+<div id="app">
+
+</div>
+<script src="./vue.js"></script>
+<script src="./node_modules/axios/dist/axios.js"></script>
+<script>
+
+
+    Vue.prototype.$axios = axios;
+    Vue.prototype.$axios.defaults.baseURL = 'http://local.jiyunoa.cn';
+
+    const vm = new Vue({
+        el:'#app',
+        template:`
+        <div>
+            <button @click="sendAjax">发送并发合并请求</button>
+        </div>
+        `,
+        data: { // data 属性中，存放的是 el 中要用到的数据
+            msg: 'vue-axios的使用', // 通过 Vue 提供的指令，很方便的就能把数据渲染到页面上，程序员不再手动操作DOM元素了【前端的Vue之类的框架，不提倡我们去手动操作DOM元素了】
+            list : [],
+        },
+        methods:{
+            sendAjax(){
+                var q1 = this.$axios.get('/jysc/market/StudentMajorStatistics/1');
+                var q2 = this.$axios.get('/jysc/market/MarketPerformanceStatistics');
+
+                this.$axios.all([q1,q2]).then((ret1,ret2)=>{
+                    console.log(ret1);
+                    console.log("+++++++");
+                    console.log(ret2)
+                }).catch((err)=>{
+                    console.log(err);
+                })
+            }
+        }
+    })
+</script>
+</body>
+</html>

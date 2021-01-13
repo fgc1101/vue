@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>hello vue</title>
+</head>
+<body>
+<div id="app">
+    <div><a href="javascript:;" @click="change">切换登陆方式</a></div>
+    <div v-if="show">手机登陆 <input type="text" name="phone" placeholder="手机登陆"> <button>登陆</button></div>
+    <div v-else>邮箱登陆 <input type="text" name="email" placeholder="邮箱登陆"> <button>登陆</button></div>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+    const vm = new Vue({
+        el:'#app',
+        data: { // data 属性中，存放的是 el 中要用到的数据
+            msg: '欢迎学习Vue,我也不知道是不是正确的', // 通过 Vue 提供的指令，很方便的就能把数据渲染到页面上，程序员不再手动操作DOM元素了【前端的Vue之类的框架，不提倡我们去手动操作DOM元素了】
+            show: false
+        },
+        methods:{
+            change() {
+                this.show = !this.show;
+            },
+        }
+    })
+</script>
+<script>
+    // 属性的字面量
+    // 函数的字面量
+</script>
+</body>
+</html>

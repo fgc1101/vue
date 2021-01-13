@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-router的使用</title>
+</head>
+<body>
+<div id="app">
+    <div>{{msg}}</div>
+</div>
+<script src="./vue.js"></script>
+<script src="./node_modules/vue-router/dist/vue-router.js"></script>
+<script>
+
+    const com2 = {
+        template: "#com2",
+        data(){
+            return {
+                heros:[{
+                    id:1,
+                    name:'张三丰',
+                },{
+                    id:2,
+                    name:'张君宝',
+                },{
+                    id:3,
+                    name:'张无忌',
+                }],
+                booksLists: ['神雕侠侣','射雕英雄传','倚天屠龙记','雪山飞狐','鹿鼎记'],
+            }
+        },
+        props:{
+            height:{
+                type: Number,
+            },
+            books_lists:{
+                type: Array,
+            }
+        },
+        methods:{
+            btnOk:function(item){
+                console.log(item.name)
+                this.$emit('my-event',this.heros);
+            }
+        }
+    }
+
+    const App = {
+        template:`
+            <div>
+                <h1>欢迎来到德莱联盟！</h1>
+                <router-link to="/login">登陆</router-link>
+                <router-link to="/register">注册</router-link>
+
+                <router-view></router-view>
+            </div>
+        `
+    }
+
+    const Login = {
+        template: `
+            <h1>我是登陆组件！</h1>
+        `
+    }
+
+    const Register = {
+        template: `
+            <h1>我是注册组件！</h1>
+        `
+    }
+
+    Vue.use(VueRouter);
+
+    var router = new VueRouter({
+        routes: [
+            {
+                path: '/login',
+                component : Login
+            },
+            {
+                path: '/register',
+                component : Register
+            }
+        ]
+    });
+
+
+    const vm = new Vue({
+        el:'#app',
+        template:`<App />`,
+        data: { // data 属性中，存放的是 el 中要用到的数据
+            msg: 'vue-router组件的使用', // 通过 Vue 提供的指令，很方便的就能把数据渲染到页面上，程序员不再手动操作DOM元素了【前端的Vue之类的框架，不提倡我们去手动操作DOM元素了】
+            list : [],
+        },
+        components:{
+            App,
+        },
+        router: router
+    })
+</script>
+</body>
+</html>

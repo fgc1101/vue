@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>hello vue</title>
+    <style>
+        .active{
+            background-color: #FF00FF;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <ul>
+        <li v-for="(item, index) in books" :class="{ active : curIndex === index}" @click="change(index)">{{item}}</li>
+    </ul>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+    const vm = new Vue({
+        el:'#app',
+        data: { // data 属性中，存放的是 el 中要用到的数据
+            msg: '欢迎学习Vue,我也不知道是不是正确的', // 通过 Vue 提供的指令，很方便的就能把数据渲染到页面上，程序员不再手动操作DOM元素了【前端的Vue之类的框架，不提倡我们去手动操作DOM元素了】
+            show: false,
+            books: ['鹿鼎记','神雕侠侣','射雕英雄传','同心生死约','倚天屠龙记'],
+            curIndex: 0
+        },
+        methods:{
+            change(index) {
+                this.curIndex = index;
+            },
+        }
+    })
+</script>
+<script>
+    // 属性的字面量
+    // 函数的字面量
+</script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>全局组件</title>
+</head>
+<body>
+<div id="app">
+    <div v-if="show">{{msg}}</div>
+
+    <my-comp></my-comp>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+
+    // 定义vue组件
+    var com1 = Vue.extend({
+        template: '<h1>这是VUE的组件</h1>',
+    })
+
+    Vue.component('myComp',com1);
+
+    const vm = new Vue({
+        el:'#app',
+        data: { // data 属性中，存放的是 el 中要用到的数据
+            msg: '欢迎学习Vue,我也不知道是不是正确的', // 通过 Vue 提供的指令，很方便的就能把数据渲染到页面上，程序员不再手动操作DOM元素了【前端的Vue之类的框架，不提倡我们去手动操作DOM元素了】
+            show: true
+        },
+    })
+</script>
+<script>
+    // 属性的字面量
+    // 函数的字面量
+</script>
+</body>
+</html>

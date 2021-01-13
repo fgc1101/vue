@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>父子组件</title>
+</head>
+<body>
+<div id="app">
+    <div>{{msg}}</div>
+    <com2></com2>
+</div>
+<script src="../js/vue.js"></script>
+<script type="text/x-handlebars-template" id="com2">
+    <div>
+        <h1>子组件</h1>
+        <p>我是子组件里面的一段文字！</p>
+    </div>
+</script>
+<script>
+
+    const vm = new Vue({
+        el:'#app',
+        data: {
+            // data 属性中，存放的是 el 中要用到的数据
+            msg: 'com1是子组件，com2是父组件', // 通过 Vue 提供的指令，很方便的就能把数据渲染到页面上，程序员不再手动操作DOM元素了【前端的Vue之类的框架，不提倡我们去手动操作DOM元素了】
+            list : [],
+        },
+        components:{
+            com2:{
+                template:'#com2'
+            }
+        },
+        methods:{
+            getHeros:function(item){
+                console.log(123);
+                console.log(item)
+
+                for(let i in item){
+                    this.list.push(item[i].name) ;
+                }
+                console.log(this.list)
+            }
+        }
+    })
+</script>
+</body>
+</html>

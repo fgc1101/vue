@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>父子组件</title>
+</head>
+<body>
+<div id="app">
+    <div>{{msg}}</div>
+
+    <com2 :height="height" :books_lists="booksLists"></com2>
+</div>
+<script src="../js/vue.js"></script>
+<script type="text/x-handlebars-template" id="com2">
+    <div>
+        <h1>子组件</h1>
+        <span>子组件要展示的内容</span>
+        <p>我的身高是{{height}}CM</p>
+        <div>
+            <h2>书籍列表</h2>
+            <ul>
+                <li v-for="(item,index) in books_lists">{{item}}</li>
+            </ul>
+        </div>
+    </div>
+</script>
+<script>
+
+    const com2 = {
+        template: "#com2",
+        props:{
+            height:{
+                type: Number,
+            },
+            books_lists:{
+                type: Array,
+            }
+        }
+    }
+
+    const vm = new Vue({
+        el:'#app',
+        data: { // data 属性中，存放的是 el 中要用到的数据
+            msg: 'com1是子组件，com2是父组件', // 通过 Vue 提供的指令，很方便的就能把数据渲染到页面上，程序员不再手动操作DOM元素了【前端的Vue之类的框架，不提倡我们去手动操作DOM元素了】
+            show: true,
+            booksLists: ['神雕侠侣','射雕英雄传','倚天屠龙记','雪山飞狐','鹿鼎记'],
+            height: 170,
+        },
+        components:{
+            com2,
+        }
+    })
+</script>
+</body>
+</html>

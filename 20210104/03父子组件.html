@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>父子组件</title>
+</head>
+<body>
+<div id="app">
+    <div v-if="show">{{msg}}</div>
+
+    <com2></com2>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+
+    const com1 = Vue.extend({
+        template: '<h1>组件1</h1>',
+    })
+
+    const com2 = Vue.extend({
+        template: `<div>
+                        <h1>组件标题</h1>
+                        <com1></com1>
+                   </div>
+        `,
+        components: {
+            com1: com1,
+        }
+    })
+
+    const vm = new Vue({
+        el:'#app',
+        data: { // data 属性中，存放的是 el 中要用到的数据
+            msg: 'com1是子组件，com2是父组件', // 通过 Vue 提供的指令，很方便的就能把数据渲染到页面上，程序员不再手动操作DOM元素了【前端的Vue之类的框架，不提倡我们去手动操作DOM元素了】
+            show: true
+        },
+        components:{
+            com2: com2,
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>02-v-on</title>
+</head>
+<body>
+<div id="app">
+    <h1>v-on</h1>
+    <h2>统计计数：{{counts}}</h2>
+    <button v-on:click="add">+</button>
+    <button v-on:click="sub">-</button>
+
+    <img v-bind:src="images" alt="">
+</div>
+<script src="./js/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: '#app',
+        data:{
+            counts: 0,
+            images: "https://img-home.csdnimg.cn/images/20201230095952.png"
+        },
+        methods:{
+            add:function(){
+                console.log("这里点击触发了add方法！");
+                this.counts++
+            },
+            sub:function(){
+                console.log("这里点击触发了sub方法！");
+                this.counts--
+            }
+        }
+    })
+</script>
+</body>
+</html>

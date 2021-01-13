@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>hello vue</title>
+</head>
+<body>
+<div id="app">
+    <ul>
+        <li v-for="item in movies">{{item}}</li>
+    </ul>
+
+    <h1>书籍的总价格是：{{totalCount}}</h1>
+
+    <ul>
+        <li v-for="(item,index) in books">{{index}}--{{item.name}}</li>
+    </ul>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+    const app = new Vue({
+        el:'#app',
+        data: { // data 属性中，存放的是 el 中要用到的数据
+            msg: '欢迎学习Vue,我也不知道是不是正确的', // 通过 Vue 提供的指令，很方便的就能把数据渲染到页面上，程序员不再手动操作DOM元素了【前端的Vue之类的框架，不提倡我们去手动操作DOM元素了】
+            movies : ['海王','速度与激情','隋唐英雄传','神雕侠侣'],
+            books: [
+                {id:110, name:'UNIX编程艺术',price:100},
+                {id:120, name:'UNIX编程艺术1',price:200},
+                {id:130, name:'UNIX编程艺术2',price:300},
+                {id:140, name:'UNIX编程艺术3',price:400},
+                {id:150, name:'UNIX编程艺术4',price:500},
+            ]
+        },
+        computed: {
+            totalCount: function(){
+                let sum = 0
+                for(let i=0;i<this.books.length;i++){
+                    sum += this.books[i].price
+                }
+                return sum;
+            }
+        }
+    })
+</script>
+</body>
+</html>
