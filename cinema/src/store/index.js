@@ -1,6 +1,11 @@
 import Vuex from 'vuex'
 import Vue from 'vue'
 
+import mutations from './mutations'
+import getters from './getters'
+import actions from './actions'
+import ModuleA from './modules/ModuleA'
+
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
@@ -23,46 +28,11 @@ const store = new Vuex.Store({
       year:2
     }
   },
-  mutations:{
-    increment(state,count){
-      return state.count += count;
-    },
-    addStudent(state,student){
-      return state.students.push(student)
-    },
-    updateStu(state,data){
-      let key = Object.keys(data.data);
-      let value = Object.values(data.data);
-      key.forEach(function(val,index){
-        Vue.set(state.info,val,value[index])
-      })
-    },
-  },
-  getters:{
-    more30stu(state){
-      return state.students.filter(s=> s.age >= 20);
-    },
-    more30stuLenth(state,getters){
-      return getters.more30stu.length
-    },
-    moreAgeStu(state,getters){
-      // return function(age){
-      //   return state.students.filter(s=> s.age >= age);
-      // }
-
-      return age => {
-        return state.students.filter(s=> s.age >= age);
-      }
-    }
-  },
-  actions:{
-    aUpdateStu(context,data){
-
-      console.log(data);
-      setTimeout(()=>{
-        context.commit('updateStu',data);
-      })
-    }
+  mutations,
+  getters,
+  actions,
+  modules:{
+    a:ModuleA,
   }
 })
 
