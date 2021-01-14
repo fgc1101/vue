@@ -11,6 +11,7 @@
       <button @click="btnAdd(10)">+10</button>
       <button @click="addStu">添加学生</button>
       <button @click="updateStu">更新学生信息</button>
+      <button @click="aupdateStu">异步更新学生信息</button>
     </div>
     <div>
       {{$store.state.info}}
@@ -40,6 +41,16 @@ export default {
         type:'updateStu',
         data
       })
+    },
+    aupdateStu(){
+      var data = {
+        num:200,
+        haver:'chw'
+      }
+      this.$store.dispatch({
+        type: 'aUpdateStu',
+        data: data
+      });
     }
   }
 }

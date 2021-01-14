@@ -31,11 +31,8 @@ const store = new Vuex.Store({
       return state.students.push(student)
     },
     updateStu(state,data){
-      console.log(data.data)
       let key = Object.keys(data.data);
-      console.log(key[0])
       let value = Object.values(data.data);
-      console.log(value[0])
       key.forEach(function(val,index){
         Vue.set(state.info,val,value[index])
       })
@@ -56,6 +53,15 @@ const store = new Vuex.Store({
       return age => {
         return state.students.filter(s=> s.age >= age);
       }
+    }
+  },
+  actions:{
+    aUpdateStu(context,data){
+
+      console.log(data);
+      setTimeout(()=>{
+        context.commit('updateStu',data);
+      })
     }
   }
 })
