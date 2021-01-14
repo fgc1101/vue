@@ -1,21 +1,21 @@
 <template>
   <div id="app">
 
-    <img src="./assets/logo.png">
-    <h1>{{$store.state.count}}</h1>
-    <button @click="btnAdd">tianjia</button>
-    <p>{{$store.getters.more30stu}}</p>
-    <p>个数：{{$store.getters.more30stuLenth}}</p>
-    <p>大于40岁的学生：{{$store.getters.moreAgeStu(40)}}</p>
-    <div>
-      <button @click="btnAdd(10)">+10</button>
-      <button @click="addStu">添加学生</button>
-      <button @click="updateStu">更新学生信息</button>
-      <button @click="aupdateStu">异步更新学生信息</button>
-    </div>
-    <div>
-      {{$store.state.info}}
-    </div>
+<!--    <img src="./assets/logo.png">-->
+<!--    <h1>{{$store.state.count}}</h1>-->
+<!--    <button @click="btnAdd">tianjia</button>-->
+<!--    <p>{{$store.getters.more30stu}}</p>-->
+<!--    <p>个数：{{$store.getters.more30stuLenth}}</p>-->
+<!--    <p>大于40岁的学生：{{$store.getters.moreAgeStu(40)}}</p>-->
+<!--    <div>-->
+<!--      <button @click="btnAdd(10)">+10</button>-->
+<!--      <button @click="addStu">添加学生</button>-->
+<!--      <button @click="updateStu">更新学生信息</button>-->
+<!--      <button @click="aupdateStu">异步更新学生信息</button>-->
+<!--    </div>-->
+<!--    <div>-->
+<!--      {{$store.state.info}}-->
+<!--    </div>-->
     <router-view/>
   </div>
 </template>
