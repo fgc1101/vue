@@ -13,7 +13,11 @@ Vue.config.productionTip = false
 
 Vue.use(ElementUI);
 
-axios.defaults.baseURL = 'http://local.shenbang.cn/api'
+axios.defaults.baseURL = 'http://www.tp5.com/api'
+axios.interceptors.request.use(config => {
+  config.headers.Authorization = window.sessionStorage.getItem('_token');
+  return config
+})
 Vue.prototype.$http = axios;
 
 new Vue({
