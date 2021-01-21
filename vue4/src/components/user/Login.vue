@@ -56,7 +56,7 @@
         this.$refs.loginFormRef.validate(async valid => {
           if(!valid) return;
 
-          const { data: res } = await this.$http.post('/login/login',this.login_form);
+          const { data: res } = await this.$http.post('basic/login',this.login_form);
           if(res.code === 1){
             this.$message({
               message: '恭喜您登陆成功',

@@ -10,25 +10,41 @@
         </el-header>
 <!--        页面主体-->
         <el-container>
-            <el-aside width="200px">
+            <el-aside :width="isCollapse ? '64px' : '200px' ">
+
+                <div class="toggle-button" @click="toggleCollapse">|||</div>
+
+<!--                菜单栏开始-->
                 <el-menu
-                        default-active="2"
-                        class="el-menu-vertical-demo"
-                        @open="handleOpen"
-                        @close="handleClose"
-                        background-color="#333744"
+                        background-color="#545c64"
                         text-color="#fff"
-                        active-text-color="#ffd04b">
-                    <el-submenu index="1">
+                        active-text-color="#409eff"
+                        unique-opened
+                        :collapse="isCollapse"
+                        :collapse-transition="false" router
+                        :default-active="$route.path">
+                    <el-submenu :index="item.path + ''" v-for="item in menuList" :key="item.id">
                         <template slot="title">
                             <i class="el-icon-location"></i>
-                            <span>导航一</span>
+                            <span>{{item.authName}}</span>
                         </template>
-                        <el-menu-item index="1-3">选项3</el-menu-item>
+<!--                        二级菜单-->
+                        <el-menu-item :index="subItem.path + ''" v-for="subItem in item.children" :key="subItem.id">
+                            <template slot="title">
+                                <i class="el-icon-menu"></i>
+                                <span>{{subItem.authName}}</span>
+                            </template>
+                        </el-menu-item>
                     </el-submenu>
                 </el-menu>
+<!--                菜单栏结束-->
+
             </el-aside>
-            <el-main>Main</el-main>
+
+<!--            右侧内容模块-->
+            <el-main>
+                <router-view></router-view>
+            </el-main>
         </el-container>
     </el-container>
 </template>
@@ -36,6 +52,16 @@
 <script>
   export default {
     name: "Home",
+    data(){
+     return {
+       // 左侧菜单
+       menuList: [],
+       isCollapse: false,
+     }
+    },
+    created(){
+      this.getMenuList()
+    },
     methods: {
       exit(){
         window.sessionStorage.clear();
@@ -46,6 +72,15 @@
       },
       handleClose(key, keyPath) {
         console.log(key, keyPath);
+      },
+      async getMenuList(){
+        const { data: res } = await this.$http.get('basic/menu')
+        if(res.code !== 1) return this.$message.error('获取权限列表失败');
+        // console.log(res);
+        this.menuList = JSON.parse(JSON.stringify(res.data));
+      },
+      toggleCollapse(){
+        this.isCollapse = !this.isCollapse;
       }
     }
   }
@@ -80,6 +115,19 @@
     }
     .el-aside{
         background-color: #333744;
+        .el-menu{
+            border-right: none;
+        }
+
+        .toggle-button{
+            background-color: #4a5064;
+            font-size: 10px;
+            line-height:24px;
+            color: #fff;
+            text-align: center;
+            letter-spacing: 0.2em;
+            cursor: pointer;
+        }
     }
     .el-main{
         background-color: #eaedf1;
