@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../components/home/Home'
 import Login from '../components/user/Login'
 import Welcome from '../components/home/Welcome'
-import Users from '../components/user/Users'
+import Users from '../components/user/Users' // 用户列表组件
 
 Vue.use(VueRouter)
 

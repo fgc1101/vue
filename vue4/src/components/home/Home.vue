@@ -1,12 +1,12 @@
 <template>
     <el-container class="home_container">
 <!--        头部区域-->
-        <el-header>
+        <el-header height="60px">
             <div>
                 <img src="../../assets/images/logo.jpeg" class="logo_img"  alt="">
                 <span>电商后台管理系统</span>
             </div>
-            <el-button type="primary" @click="exit">退出按钮</el-button>
+            <el-button type="warning" @click="exit">退出按钮</el-button>
         </el-header>
 <!--        页面主体-->
         <el-container>
