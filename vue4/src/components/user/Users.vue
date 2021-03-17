@@ -67,7 +67,7 @@
                         width="180">
                     <template slot-scope="scope">
                         <el-tooltip class="item" effect="dark" content="编辑" placement="top" :enterable="false">
-                            <el-button type="primary" icon="el-icon-edit" size="mini"></el-button>
+                            <el-button type="primary" icon="el-icon-edit" size="mini" @click="showEditDialog(scope.row.id)"></el-button>
                         </el-tooltip>
                         <el-tooltip class="item" effect="dark" content="删除" placement="top" :enterable="false">
                             <el-button type="danger" icon="el-icon-delete" size="mini"></el-button>
@@ -114,9 +114,22 @@
                 </el-form>
             </span>
             <span slot="footer" class="dialog-footer">
-    <el-button @click="addDialogVisible = false">取 消</el-button>
-    <el-button type="primary" @click="addDialogVisible = false">确 定</el-button>
-  </span>
+                <el-button @click="addDialogVisible = false">取 消</el-button>
+                <el-button type="primary" @click="addUser">确 定</el-button>
+            </span>
+        </el-dialog>
+
+        <!-- 编辑用户 -->
+        <el-dialog
+                title="编辑用户"
+                :visible.sync="editDialogVisible"
+                width="30%"
+                >
+            <span>这是一段编辑信息</span>
+            <span slot="footer" class="dialog-footer">
+                <el-button @click="editDialogVisible = false">取 消</el-button>
+                <el-button type="primary" @click="editDialogVisible = false">确 定</el-button>
+            </span>
         </el-dialog>
 <!--        卡片视图区域结束-->
     </div>
@@ -139,12 +152,14 @@
         userList:[],
         total:0,
         addDialogVisible: false,
+        editDialogVisible: false,
         addForm: {
           nickname: '',
           username: '',
           email: '',
           telphone:'',
         },
+        editFrom:{},
         addFromRules:{
           nickname: [
             {
@@ -204,6 +219,23 @@
       // 监听添加用户对话框的关闭事件
       addDialogClosed(){
         this.$refs.addRuleFormRef.resetFields();
+      },
+      //添加用户
+      addUser(){
+        this.$refs.addRuleFormRef.validate(async valid => {
+           console.log(valid);
+           if(!valid) return;
+           const {data : res} = await this.$http.post('/users',this.addForm);
+        })
+      },
+      // 编辑用户
+      showEditDialog(id){
+        this.editDialogVisible = true;
+        console.log(id);
+
+        this.$http.get('/users/'+ id).then((res)=>{
+          console.log(res);
+        });
       }
     }
   }
